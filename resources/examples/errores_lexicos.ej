@@ -1,0 +1,196 @@
+// Archivo de Pruebas de Errores Léxicos para EspañolJava Lexer
+// Este archivo demuestra cómo el lexer maneja símbolos desconocidos
+
+// ============================================================================
+// EJEMPLOS DE ERRORES LÉXICOS - SÍMBOLOS DESCONOCIDOS
+// ============================================================================
+
+// Error 1: Símbolo dólar
+precio $ = 100;  // ERROR: $ es desconocido
+
+// Error 2: Hash/almohadilla
+#comentario      // ERROR: # es desconocido
+
+// Error 3: Comilla invertida (acento grave)
+`variable        // ERROR: ` es desconocido
+
+// Error 4: Ampersand simple (debe ser &&)
+si (a & b) { }   // ERROR: & sin el segundo & es desconocido
+
+// Error 5: Barra vertical simple (debe ser ||)
+si (a | b) { }   // ERROR: | sin el segundo | es desconocido
+
+// Error 6: Tilde (~) fuera de contexto
+x = ~y;          // ERROR: ~ es desconocido en este contexto
+
+// Error 7: Gorro (^) como operador independiente (pero ** es válido para potencia)
+x = a ^ b;       // VÁLIDO: ^ es POTENCIA_OP
+x = a ^ ^ b;     // ERROR: segundo ^ es extra
+
+// Error 8: Múltiples caracteres especiales
+@error #fail $   // ERROR: todos son desconocidos
+
+// ============================================================================
+// PROGRAMAS VÁLIDOS CON CASOS ESPECIALES
+// ============================================================================
+
+publico clase ErrorHandler {
+    
+    // Identificadores complejos válidos
+    privado entero var_123;
+    privado entero _private_var;
+    privado entero CONSTANTE;
+    
+    publico vacio pruebaNumeros() {
+        // Números válidos
+        entero a = 123;
+        decimal b = 123.456;
+        decimal c = 0.5;
+        decimal d = 5.;
+        decimal e = .5;
+        decimal f = 1e10;
+        decimal g = 1.5e-2;
+    }
+    
+    publico vacio pruebaCadenas() {
+        // Cadenas válidas con escapes
+        cadena s1 = "Hola mundo";
+        cadena s2 = 'Cadena simple';
+        cadena s3 = "Salto\nde línea";
+        cadena s4 = "Tabulación\tet";
+        cadena s5 = "Comilla\"interna";
+        cadena s6 = "Barra\\invertida";
+    }
+    
+    publico vacio pruebaOperadores() {
+        entero x = 5;
+        entero y = 10;
+        
+        // Operadores válidos
+        x = y + x;
+        x = y - x;
+        x = y * x;
+        x = y / x;
+        x = y % x;
+        
+        // Comparación
+        si (x == y) { }
+        si (x != y) { }
+        si (x < y) { }
+        si (x > y) { }
+        si (x <= y) { }
+        si (x >= y) { }
+        
+        // Lógicos
+        si (x > 0 && y > 0) { }
+        si (x > 0 || y > 0) { }
+        si (!true) { }
+        
+        // Incremento/Decremento
+        x++;
+        y--;
+        
+        // Potencia
+        x = potencia(2, 8);
+    }
+    
+    publico vacio pruebaFuncionesMatematicas() {
+        decimal resultado = potencia(2, 3);      // 8
+        decimal raizDe9 = raiz(9);               // 3
+        decimal senoPI = seno(3.14159);          // ~0
+        decimal cosenoPI = coseno(3.14159);      // ~-1
+        decimal logE = logaritmo(2.71828);       // 1
+        entero aleatorio = aleatorio();
+        entero abs_neg = absoluto(-5);           // 5
+        entero min = minimo(3, 7);               // 3
+        entero max = maximo(3, 7);               // 7
+    }
+    
+    publico vacio pruebaComentarios() {
+        // Este es un comentario de línea
+        
+        /* Este es un comentario
+           que abarca múltiples
+           líneas */
+        
+        // Comentarios pueden estar en cualquier lado
+        entero x = 5; // comentario al final de línea
+        
+        /* Comentarios /* anidados */ no son soportados en ANTLR4 */
+    }
+    
+    publico vacio pruebaDelimitadores() {
+        // Llaves
+        { }
+        
+        // Paréntesis
+        ( )
+        
+        // Corchetes (para arrays futuros)
+        [ ]
+        
+        // Punto y coma
+        ;
+        
+        // Coma
+        , 
+        
+        // Punto (acceso a miembros)
+        clase.metodo();
+        
+        // Arroba (anotaciones)
+        // @Override - será soportado en futuro
+    }
+    
+    publico vacio estructuraCompleta() {
+        entero suma = 0;
+        
+        para (entero i = 1; i <= 10; i++) {
+            suma = suma + i;
+        }
+        
+        si (suma > 50) {
+            imprimir("Suma mayor a 50");
+        } sino {
+            imprimir("Suma menor a 50");
+        }
+        
+        mientras (suma > 0) {
+            suma = suma - 1;
+        }
+        
+        retornar;
+    }
+}
+
+// ============================================================================
+// CASOS DE ERRORES QUE EL LEXER DETECTA
+// ============================================================================
+
+// Estos casos generarán tokens DESCONOCIDO:
+
+x $ y;           // $ es error
+x # y;           // # es error
+x ` y;           // ` es error
+x ¿ y;           // ¿ es error
+x € y;           // € es error (símbolos no ASCII)
+x ~ y;           // ~ es error (fuera de contexto numérico)
+x & y;           // & simple es error (debe ser &&)
+x | y;           // | simple es error (debe ser ||)
+
+// ============================================================================
+// RESUMEN
+// ============================================================================
+
+/*
+ * SÍMBOLOS VÁLIDOS EN ESPAÑOL JAVA:
+ * 
+ * Operadores: + - * / % ** ^ ++ -- = += -= *= /= == != < > <= >= && || ! ? :
+ * Delimitadores: { } ( ) [ ] ; , . @
+ * Palabras clave: 75+ en español (ver MiLenguaje.g4)
+ * 
+ * SÍMBOLOS INVÁLIDOS (generan error):
+ * $ # ` ¿ ¡ € ~ & (simple) | (simple) y otros caracteres especiales
+ * 
+ * El lexer reportará la línea y columna de cada error.
+ */

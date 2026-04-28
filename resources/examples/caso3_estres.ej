@@ -1,0 +1,10 @@
+// CASO 3: Programa grande (prueba de estrés)
+publico clase Calculadora {
+    entero x=5;
+    si(x>2){
+        entero p = potencia(2,8);
+        mientras(x<10){
+            x++;
+        }
+    }
+}

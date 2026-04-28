@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CompiladorEsp" default="build" basedir=".">
+    
+    <!-- ================================================================ -->
+    <!-- PROPIEDADES DEL PROYECTO                                        -->
+    <!-- ================================================================ -->
+    
+    <property name="project.name" value="CompiladorEsp" />
+    <property name="project.version" value="1.0.0" />
+    
+    <property name="src.main" location="src/main/java" />
+    <property name="src.test" location="src/test" />
+    <property name="grammar.dir" location="grammar" />
+    <property name="build.dir" location="build" />
+    <property name="dist.dir" location="dist" />
+    <property name="classes.dir" location="${build.dir}/classes" />
+    
+    <property name="antlr4.jar" location="C:/antlr/antlr-4.13.0-complete.jar" />
+    
+    <!-- ================================================================ -->
+    <!-- TARGETS                                                         -->
+    <!-- ================================================================ -->
+    
+    <target name="init" description="Inicializa directorios">
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${classes.dir}" />
+        <mkdir dir="${dist.dir}" />
+        <echo message="Directorio de build inicializado" />
+    </target>
+    
+    <target name="clean" description="Limpia archivos compilados">
+        <delete dir="${build.dir}" />
+        <delete dir="${dist.dir}" />
+        <echo message="Archivos limpios" />
+    </target>
+    
+    <target name="generate-antlr" description="Genera código desde gramática ANTLR4">
+        <exec executable="antlr4">
+            <arg value="-Dlanguage=Java" />
+            <arg value="-visitor" />
+            <arg value="-no-listener" />
+            <arg value="-o" />
+            <arg value="${src.main}/com/compilador/ej/gen" />
+            <arg value="${grammar.dir}/MiLenguaje.g4" />
+        </exec>
+        <echo message="Código ANTLR4 generado" />
+    </target>
+    
+    <target name="compile" depends="init,generate-antlr" description="Compila el proyecto">
+        <javac srcdir="${src.main}" destdir="${classes.dir}" 
+               classpath="${antlr4.jar}" encoding="UTF-8" includeantruntime="false">
+            <compilerarg value="-source" />
+            <compilerarg value="11" />
+            <compilerarg value="-target" />
+            <compilerarg value="11" />
+        </javac>
+        <echo message="Compilación completada" />
+    </target>
+    
+    <target name="build" depends="compile" description="Build completo">
+        <echo message="Build ${project.name} v${project.version} completado" />
+    </target>
+    
+    <target name="test" depends="build" description="Ejecuta las pruebas">
+        <java classpath="${classes.dir}:${antlr4.jar}" 
+              classname="com.compilador.ej.lexer.LexerMain">
+            <arg value="resources/examples/caso1_basico.ej" />
+        </java>
+    </target>
+    
+</project>

@@ -1,0 +1,6 @@
+// CASO 2: Funciones matemáticas españolas
+entero p = potencia(2,8);
+decimal r = raiz(25);
+decimal s = seno(90);
+decimal c = coseno(45);
+decimal l = logaritmo(100);

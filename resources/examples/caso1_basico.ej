@@ -1,0 +1,6 @@
+// CASO 1: Programa válido básico
+publico clase Prueba {
+    entero x = 10;
+    decimal y = 3.14;
+    imprimir(x);
+}

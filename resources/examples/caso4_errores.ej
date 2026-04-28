@@ -1,0 +1,4 @@
+// CASO 4: Errores léxicos
+123abc = 4;
+x = 5 $ 7;
+dato # 9;

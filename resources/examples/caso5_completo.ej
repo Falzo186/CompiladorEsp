@@ -1,0 +1,21 @@
+// CASO 5: Demo final - Lenguaje EspañolJava completo
+paquete demo;
+
+publico clase Sistema {
+    
+    privado entero edad = 20;
+    
+    publico vacio principal() {
+        si(edad >= 18) {
+            imprimir("Adulto");
+        }
+        
+        entero p = potencia(2, 10);
+        decimal r = raiz(100);
+        decimal seno_val = seno(45);
+        
+        mientras(edad < 100) {
+            edad++;
+        }
+    }
+}

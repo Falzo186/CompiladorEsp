@@ -1,0 +1,112 @@
+// Ejemplo de código en EspañolJava para pruebas del lexer
+
+// Comentario de línea simple
+/* Comentario de bloque
+   múltiples líneas */
+
+paquete ejemplos;
+
+importar java.util.*;
+
+publico clase Prueba {
+    
+    privado estatico entero contador = 0;
+    protegido decimal valor = 3.14;
+    booleano activo = verdadero;
+    cadena mensaje = "Hola mundo";
+    
+    publico vacio metodo() {
+        // Control de flujo
+        si (contador > 5) {
+            imprimir("Mayor que 5");
+        } sino {
+            imprimir("Menor o igual a 5");
+        }
+        
+        // Bucle mientras
+        mientras (contador < 10) {
+            contador++;
+        }
+        
+        // Bucle para
+        para (entero i = 0; i < 5; i++) {
+            imprimir(i);
+        }
+    }
+    
+    publico entero calcular(entero a, entero b) {
+        entero resultado = 0;
+        
+        // Operadores aritméticos
+        resultado = a + b;
+        resultado = a - b;
+        resultado = a * b;
+        resultado = a / b;
+        resultado = a % b;
+        resultado = potencia(a, b);
+        resultado = raiz(a);
+        
+        // Operadores lógicos
+        si (a > 0 && b < 10) {
+            imprimir("Condición verdadera");
+        }
+        
+        si (a == 5 || b == 10) {
+            imprimir("Igualdad encontrada");
+        }
+        
+        // Operadores ternarios
+        entero maximo = a > b ? a : b;
+        
+        // Operadores de incremento/decremento
+        a++;
+        b--;
+        
+        retornar resultado;
+    }
+    
+    publico entero funcionesMatematicas() {
+        decimal senoDe45 = seno(45);
+        decimal cosenoDe90 = coseno(90);
+        decimal logaritmoNatural = logaritmo(2.71828);
+        entero aleatorioNum = aleatorio();
+        entero valorAbsoluto = absoluto(-5);
+        entero minimo = minimo(10, 20);
+        entero maximo = maximo(10, 20);
+        
+        retornar 0;
+    }
+    
+    publico vacio manejando_errores() {
+        intentar {
+            entero x = 10 / 0;
+        } capturar (Exception e) {
+            imprimir("Error encontrado");
+        } finalmente {
+            imprimir("Limpieza completada");
+        }
+        
+        lanzar nuevo Exception("Error de prueba");
+    }
+    
+    publico booleano comparaciones(entero x, entero y) {
+        si (x < y) retornar verdadero;
+        si (x > y) retornar falso;
+        si (x == y) retornar verdadero;
+        si (x != y) retornar falso;
+        si (x <= y) retornar verdadero;
+        si (x >= y) retornar falso;
+        retornar nulo;
+    }
+    
+    // Identificadores válidos
+    privado entero variable1;
+    privado entero contador_global;
+    privado entero _miVariable;
+    privado entero miVar123;
+}
+
+// Ejemplos de errores léxicos que serán detectados:
+// $ error - símbolo desconocido
+// # error - símbolo desconocido
+// @ inicio de línea
