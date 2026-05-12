@@ -1,0 +1,12 @@
+publico clase Calculadora {
+
+entero numero1  // ERROR: falta ;
+
+publico entero sumar(entero a, entero b{  // ERROR: falta  )
+si(a > 0)
+retornar a + b;
+}
+
+}
+
+// esto para que lo analice y pues a ver si muestra error 

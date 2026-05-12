@@ -1,0 +1,8 @@
+entero x=5;
+
+si(x>2){
+entero p = potencia(2,8);
+mientras(x<10){
+x++;
+}
+}

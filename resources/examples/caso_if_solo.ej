@@ -1,0 +1,3 @@
+si(x>2){
+imprimir(x);
+}

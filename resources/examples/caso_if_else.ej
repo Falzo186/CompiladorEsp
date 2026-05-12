@@ -1,0 +1,6 @@
+si(x>5){
+imprimir("Mayor");
+}
+sino{
+imprimir("Menor");
+}

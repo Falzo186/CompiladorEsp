@@ -1,0 +1,6 @@
+publico clase Persona {
+
+entero edad;
+cadena nombre;
+
+}

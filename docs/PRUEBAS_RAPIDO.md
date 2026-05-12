@@ -96,6 +96,7 @@ c:\Users\alexp\CompiladorEsp\
 ├── ejecutar_pruebas.ps1          👈 EJECUTA ESTO (script automático)
 ├── COMO_HACER_PRUEBAS.md         👈 GUÍA DETALLADA
 ├── REPORTE_PRUEBAS.md            👈 REPORTE COMPLETO
+├── src/main/java/com/compilador/ej/parser/ParserTest.java  👈 Prueba de parser
 ├── MiLenguaje.g4                 (gramática - ya compilada)
 ├── MiLenguajeLexer.class         (compilado - listo para usar)
 ├── ejemplos/
@@ -121,6 +122,14 @@ $env:PATH = "C:\antlr;$env:PATH"; $env:CLASSPATH = "C:\antlr\antlr-4.13.0-comple
 ### 3. Presiona Enter
 
 **Si ves tokens (montones de líneas con @ y números) = ✅ FUNCIONA**
+
+### 4. Probar parser con árbol de parseo
+
+```powershell
+cd "c:\Users\alexp\CompiladorEsp"; $A='C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'; & 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$A" com.compilador.ej.parser.ParserTest resources\examples\caso_parser_demo.ej
+```
+
+**Esto imprime:** lista de tokens, errores sintácticos y el `parse tree` de `programa()`.
 
 ---
 

@@ -68,7 +68,7 @@ CompiladorEsp/
 cd CompiladorEsp
 
 # Compilar
-javac -cp "C:\antlr\antlr-4.13.0-complete.jar" src/main/java/com/compilador/ej/lexer/*.java
+.\bin\compilar.bat
 
 # Ejecutar
 java -cp "build/classes:C:\antlr\antlr-4.13.0-complete.jar" \

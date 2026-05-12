@@ -28,7 +28,7 @@ help:
 
 generate:
 	@echo "Generando código ANTLR4..."
-	$(ANTLR4) -Dlanguage=Java -visitor -no-listener \
+	$(ANTLR4) -Dlanguage=Java -visitor -no-listener -package com.compilador.ej.gen -Xexact-output-dir \
 		-o $(SRC_MAIN)/com/compilador/ej/gen \
 		$(GRAMMAR_DIR)/MiLenguaje.g4
 	@echo "✓ Código generado"
@@ -38,7 +38,8 @@ compile: generate
 	$(JAVAC) -d $(CLASSES_DIR) \
 		-cp "C:\antlr\antlr-4.13.0-complete.jar" \
 		-encoding UTF-8 \
-		$(SRC_MAIN)/com/compilador/ej/lexer/*.java
+		$(SRC_MAIN)/com/compilador/ej/lexer/*.java \
+		$(SRC_MAIN)/com/compilador/ej/gen/*.java
 	@echo "✓ Compilación completada"
 
 build: compile

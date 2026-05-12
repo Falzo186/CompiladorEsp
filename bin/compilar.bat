@@ -7,6 +7,7 @@ set BUILD_DIR=build
 set CLASSES_DIR=%BUILD_DIR%\classes
 set GEN_DIR=%SRC_MAIN%\com\compilador\ej\gen
 set LEXER_DIR=%SRC_MAIN%\com\compilador\ej\lexer
+set PARSER_DIR=%SRC_MAIN%\com\compilador\ej\parser
 
 if "%1"=="clean" (
     if exist "%BUILD_DIR%" rmdir /s /q "%BUILD_DIR%"
@@ -20,15 +21,16 @@ if "%1"=="test" (
 
 echo Generando codigo ANTLR4...
 if not exist "%GEN_DIR%" mkdir "%GEN_DIR%"
-antlr4 -Dlanguage=Java -visitor -no-listener -o "%GEN_DIR%" "%GRAMMAR%"
+antlr4 -Dlanguage=Java -visitor -no-listener -package com.compilador.ej.gen -Xexact-output-dir -o "%GEN_DIR%" "%GRAMMAR%"
 if !ERRORLEVEL! neq 0 exit /b 1
 
 echo Compilando codigo Java...
 if not exist "%CLASSES_DIR%" mkdir "%CLASSES_DIR%"
-javac -d "%CLASSES_DIR%" -cp "%ANTLR4_JAR%" "%LEXER_DIR%\LexerEJ.java" "%LEXER_DIR%\LexerMain.java" "%GEN_DIR%\MiLenguajeLexer.java" "%GEN_DIR%\MiLenguajeParser.java" "%GEN_DIR%\MiLenguajeVisitor.java" "%GEN_DIR%\MiLenguajeBaseVisitor.java" "%GEN_DIR%\MiLenguaje.java"
+javac -encoding UTF-8 -d "%CLASSES_DIR%" -cp "%ANTLR4_JAR%" "%LEXER_DIR%\LexerEJ.java" "%LEXER_DIR%\LexerMain.java" "%PARSER_DIR%\ParserTest.java" "%GEN_DIR%\MiLenguajeLexer.java" "%GEN_DIR%\MiLenguajeParser.java" "%GEN_DIR%\MiLenguajeVisitor.java" "%GEN_DIR%\MiLenguajeBaseVisitor.java"
 if !ERRORLEVEL! neq 0 (echo Error en compilacion & exit /b 1)
 
 echo.
 echo OK - Compilacion completada
 echo Prueba: compilar.bat test
+echo Prueba parser: java -cp "build\classes;%ANTLR4_JAR%" com.compilador.ej.parser.ParserTest resources\examples\caso_parser_demo.ej
 endlocal

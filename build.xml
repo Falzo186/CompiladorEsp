@@ -39,6 +39,9 @@
             <arg value="-Dlanguage=Java" />
             <arg value="-visitor" />
             <arg value="-no-listener" />
+            <arg value="-package" />
+            <arg value="com.compilador.ej.gen" />
+            <arg value="-Xexact-output-dir" />
             <arg value="-o" />
             <arg value="${src.main}/com/compilador/ej/gen" />
             <arg value="${grammar.dir}/MiLenguaje.g4" />

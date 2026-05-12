@@ -1,0 +1,9 @@
+publico clase Persona {
+
+entero edad;
+
+publico vacio saludar(){
+imprimir("Hola");
+}
+
+}

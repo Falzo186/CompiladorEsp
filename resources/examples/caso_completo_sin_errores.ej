@@ -1,0 +1,18 @@
+publico clase Calculadora {
+
+entero numero1;
+entero numero2;
+
+publico entero sumar(entero a, entero b){
+si(a > 0){
+retornar a + b;
+} sino {
+retornar 0;
+}
+}
+
+publico vacio mostrar(){
+imprimir("Resultado: ");
+}
+
+}

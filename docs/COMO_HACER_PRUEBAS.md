@@ -37,8 +37,8 @@ ls build\classes\com\compilador\ej
 Ahora ejecuta una prueba usando el nuevo lexer compilado:
 
 ```powershell
-$ANTLR4 = 'C:\antlr\antlr-4.13.0-complete.jar'
-java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso1_basico.ej
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso1_basico.ej
 ```
 
 **IMPORTANTE:** Las pruebas ahora están en `resources/examples/` (nueva estructura clean architecture)
@@ -50,8 +50,8 @@ java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\exa
 ### CASO 1: Programa Básico Válido
 
 ```powershell
-$ANTLR4 = 'C:\antlr\antlr-4.13.0-complete.jar'
-java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso1_basico.ej
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso1_basico.ej
 ```
 
 **Esperado:** Deberías ver algo como:
@@ -70,8 +70,8 @@ OK - Analisis completado sin errores
 ### CASO 2: Funciones Matemáticas (IMPORTANTE)
 
 ```powershell
-$ANTLR4 = 'C:\antlr\antlr-4.13.0-complete.jar'
-java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso2_matematicas.ej
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso2_matematicas.ej
 ```
 
 **Busca líneas como estas:**
@@ -88,8 +88,8 @@ java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\exa
 ### CASO 3: Programa de Estrés
 
 ```powershell
-$ANTLR4 = 'C:\antlr\antlr-4.13.0-complete.jar'
-java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso3_estres.ej
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso3_estres.ej
 ```
 
 **Esperado:** Muchos tokens sin errores (40+)
@@ -101,8 +101,8 @@ java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\exa
 ### CASO 4: Detectar Errores Léxicos
 
 ```powershell
-$ANTLR4 = 'C:\antlr\antlr-4.13.0-complete.jar'
-java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso4_errores.ej
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso4_errores.ej
 ```
 
 **Busca estos tokens DESCONOCIDOS:**
@@ -118,8 +118,8 @@ java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\exa
 ### CASO 5: Demo Completa
 
 ```powershell
-$ANTLR4 = 'C:\antlr\antlr-4.13.0-complete.jar'
-java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso5_completo.ej
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\examples\caso5_completo.ej
 ```
 
 **Esperado:** 72 tokens correctamente procesados
@@ -134,14 +134,14 @@ Copia y pega esto en PowerShell para ejecutar TODOS los casos de una vez:
 
 ```powershell
 cd "c:\Users\alexp\CompiladorEsp"
-$ANTLR4 = 'C:\antlr\antlr-4.13.0-complete.jar'
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
 $casos = @('caso1_basico', 'caso2_matematicas', 'caso3_estres', 'caso4_errores', 'caso5_completo')
 
 foreach ($caso in $casos) {
     Write-Host "\n================================" -ForegroundColor Cyan
     Write-Host "Prueba: $caso" -ForegroundColor Yellow
     Write-Host "================================"
-    java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain "resources\examples\$caso.ej"
+    & 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain "resources\examples\$caso.ej"
 }
 ```
 
@@ -232,6 +232,14 @@ cd "c:\Users\alexp\CompiladorEsp"
 
 **Solución:** Asegúrate que ANTLR4 esté en PATH o usa el script compilar.bat que lo maneja automáticamente
 
+### Error: "java no se reconoce"
+
+**Solución:** Usa la ruta completa del JDK o agrega Java al `PATH`.
+Ejemplo:
+```powershell
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -version
+```
+
 ### Error: "build\classes no existe"
 
 **Solución:** Ejecuta la compilación:
@@ -250,7 +258,7 @@ cd "c:\Users\alexp\CompiladorEsp"; .\bin\compilar.bat test
 
 **Opción 2: Manual (cualquier caso)**
 ```powershell
-cd "c:\Users\alexp\CompiladorEsp"; $A='C:\antlr\antlr-4.13.0-complete.jar'; java -cp "build\classes;$A" com.compilador.ej.lexer.LexerMain resources\examples\caso1_basico.ej
+cd "c:\Users\alexp\CompiladorEsp"; $A='C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'; & 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$A" com.compilador.ej.lexer.LexerMain resources\examples\caso1_basico.ej
 ```
 
 ---
@@ -304,9 +312,182 @@ java -cp "build\classes;$ANTLR4" com.compilador.ej.lexer.LexerMain resources\exa
 Una vez que confirmes que todos los casos pasan:
 
 1. ✅ Fase 1: LEXER - **COMPLETADA**
-2. 🔄 Fase 2: PARSER - Próxima
+2. ✅ Fase 2: PARSER - **COMPLETADA**
 3. 📋 Fase 3: Análisis Semántico
 4. 🔨 Fase 4: Generación de Código
+
+---
+
+## 🌳 Ejemplos Completos con PARSER
+
+### Ver el Árbol de Parseo Completo
+
+Tu parser ahora interpreta **clases con atributos, métodos con parámetros, retorno e if/else**.
+
+Dos archivos de prueba:
+
+#### ✅ **CASO: Programa Completo SIN ERRORES**
+
+```powershell
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.parser.ParserTest resources\examples\caso_completo_sin_errores.ej
+```
+
+**Qué esperar:**
+- 55 tokens reconocidos sin errores léxicos
+- **0 ERRORES sintácticos**
+- Árbol completo que muestra:
+  - `programa` → `elemento` → `clase`
+  - Atributos como `miembro` → `atributo` (numero1, numero2)
+  - Métodos como `miembro` → `metodo` con:
+    - Modificador: `publico`
+    - Tipo retorno: `entero` o `vacio`
+    - Parámetros: `listaParametros` → `parametro (tipo IDENTIFICADOR)`
+    - Bloque con sentencias (if/else, retorno, imprimir)
+  - Expresiones con precedencia correcta: `a > 0`, `a + b`
+
+**Estructura visualizada:**
+```
+programa
+└── elemento
+    └── clase (Calculadora)
+        ├── miembro
+        │   └── atributo (numero1)
+        ├── miembro
+        │   └── atributo (numero2)
+        ├── miembro
+        │   └── metodo (sumar)
+        │       ├── modificadorAcceso: publico
+        │       ├── tipoRetorno: entero
+        │       ├── listaParametros: a, b
+        │       └── bloque
+        │           └── condicionEmparejada (si > else)
+        │               ├── expr: a > 0
+        │               ├── retorno a + b
+        │               └── retorno 0
+        └── miembro
+            └── metodo (mostrar)
+                ├── modificadorAcceso: publico
+                ├── tipoRetorno: vacio
+                └── bloque
+                    └── impresion("Resultado: ")
+```
+
+---
+
+#### ❌ **CASO: Programa con ERRORES SINTÁCTICOS**
+
+```powershell
+$ANTLR4 = 'C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+& 'C:\Program Files\Java\jdk-11.0.31\bin\java.exe' -cp "build\classes;$ANTLR4" com.compilador.ej.parser.ParserTest resources\examples\caso_completo_con_errores.ej
+```
+
+**Errores detectados:**
+```
+ERROR sintáctico en línea 5, columna 0: falta ';' en 'publico'
+ERROR sintáctico en línea 5, columna 39: falta ')' en '{'
+```
+
+**Por qué:**
+- Línea 3: Falta `;` después de `numero1` → Parser lo reporta cuando ve `publico` (siguiente elemento)
+- Línea 5: Falta `)` antes de `{` en firma del método → Parser lo reporta cuando ve `{`
+
+---
+
+### 📖 Cómo Leer el Árbol de Parseo
+
+**Formato del árbol:**
+
+```
+(programa 
+  (elemento 
+    (clase ... 
+      (miembro 
+        (atributo 
+          (tipo entero) 
+          numero1 
+          ;
+        )
+      ) 
+    )
+  )
+)
+```
+
+**Componentes principales:**
+
+| Nodo | Significado | Ejemplo |
+|------|-----------|---------|
+| `programa` | Raíz del árbol | Siempre presente |
+| `elemento` | Top-level (clase o sentencia) | `clase`, `sentencia` |
+| `clase` | Declaración de clase | `publico clase Persona { }` |
+| `miembro` | Componente de clase | `atributo` o `metodo` |
+| `atributo` | Variable de clase | `entero edad;` |
+| `metodo` | Función en clase | `publico entero suma(...)` |
+| `bloque` | Cuerpo entre { } | Contiene sentencias |
+| `condicionEmparejada` | if/else pareado | `si(...) {...} sino {...}` |
+| `retorno` | Sentencia return | `retornar expr;` |
+| `expr` | Expresión | `a > 0`, `a + b` |
+
+---
+
+### 🔍 Comparación Visual
+
+**SIN ERRORES:**
+```
+(programa (elemento (clase ... 
+  (miembro (atributo (tipo entero) numero1 ;)) 
+  (miembro (metodo ...
+```
+
+**CON ERRORES:**
+```
+(programa (elemento (clase ... 
+  (miembro (atributo (tipo entero) numero1 <missing ';'>))   ← ERROR: ; faltante
+  (miembro (metodo ... (listaParametros ... <missing ')')>   ← ERROR: ) faltante
+```
+
+Parser inserta tokens faltantes (`<missing '...'>`) e intenta continuar parseando.
+
+---
+
+## 📝 Mensajes de Error en Español
+
+Todos los errores sintácticos ahora se reportan **100% en español** con **comillas para mejor visualización**:
+
+| Error ANTLR Original | Traducción al Español |
+|---|---|
+| `missing ';' at 'token'` | `falta ';' en 'token'` |
+| `missing ')' at 'token'` | `falta ')' en 'token'` |
+| `missing '}' at 'token'` | `falta '}' en 'token'` |
+| `expected X but got Y` | `se esperaba X pero se obtuvo Y` |
+| `Unexpected input` | `Entrada inesperada` |
+| `no viable alternative` | `sin alternativa viable` |
+| `extraneous input` | `entrada extraña` |
+
+**Ejemplo de salida con error:**
+```
+ERROR sintáctico en línea 5, columna 0: falta ';' en 'publico'
+ERROR sintáctico en línea 5, columna 39: falta ')' en '{'
+```
+
+---
+
+### 🎯 Cómo Ejecutar Rápido
+
+**Copiar y pegar en PowerShell:**
+
+```powershell
+cd "c:\programas\CompiladorEsp"
+$A='C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar'
+$J='C:\Program Files\Java\jdk-11.0.31\bin\java.exe'
+
+Write-Host "=== SIN ERRORES ===" -ForegroundColor Green
+& $J -cp "build\classes;$A" com.compilador.ej.parser.ParserTest resources\examples\caso_completo_sin_errores.ej
+
+Write-Host "`n=== CON ERRORES ===" -ForegroundColor Red
+& $J -cp "build\classes;$A" com.compilador.ej.parser.ParserTest resources\examples\caso_completo_con_errores.ej
+```
 
 ---
 
@@ -318,4 +499,4 @@ Una vez que confirmes que todos los casos pasan:
 
 ---
 
-*Última actualización: 27 de Abril de 2026*
+*Última actualización: 30 de Abril de 2026*

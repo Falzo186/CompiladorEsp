@@ -17,6 +17,7 @@ SRC_MAIN="src/main/java"
 BUILD_DIR="build"
 CLASSES_DIR="$BUILD_DIR/classes"
 GEN_DIR="$SRC_MAIN/com/compilador/ej/gen"
+PARSER_DIR="$SRC_MAIN/com/compilador/ej/parser"
 
 # Colores para salida
 RED='\033[0;31m'
@@ -60,7 +61,7 @@ generate() {
         exit 1
     fi
     
-    antlr4 -Dlanguage=Java -visitor -no-listener -o "$GEN_DIR" "$GRAMMAR"
+    antlr4 -Dlanguage=Java -visitor -no-listener -package com.compilador.ej.gen -Xexact-output-dir -o "$GEN_DIR" "$GRAMMAR"
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Error en generación ANTLR4${NC}"
         exit 1
@@ -79,6 +80,7 @@ compile() {
           -encoding UTF-8 \
           -source 11 -target 11 \
           "$SRC_MAIN"/com/compilador/ej/lexer/*.java \
+            "$PARSER_DIR"/*.java \
           "$GEN_DIR"/*.java
     
     if [ $? -ne 0 ]; then

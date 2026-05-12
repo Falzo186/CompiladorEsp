@@ -33,7 +33,7 @@ for %%f in (*Lexer.java *Parser.java *Visitor.java *BaseVisitor.java *.tokens) d
 echo.
 echo [2/3] Generando código ANTLR4 desde MiLenguaje.g4...
 REM Generar código desde la gramática
-antlr4 -Dlanguage=Java -visitor -no-listener MiLenguaje.g4
+antlr4 -Dlanguage=Java -visitor -no-listener -package com.compilador.ej.gen -Xexact-output-dir -o src\main\java\com\compilador\ej\gen MiLenguaje.g4
 if %errorlevel% equ 0 (
     echo   ✓ Gramática procesada exitosamente
 ) else (
@@ -45,7 +45,7 @@ if %errorlevel% equ 0 (
 echo.
 echo [3/3] Compilando código Java generado...
 REM Compilar archivos Java
-javac *.java
+javac -encoding UTF-8 -cp C:\antlr\antlr-4.13.0-complete.jar -d build\classes src\main\java\com\compilador\ej\lexer\LexerEJ.java src\main\java\com\compilador\ej\lexer\LexerMain.java src\main\java\com\compilador\ej\gen\MiLenguajeLexer.java src\main\java\com\compilador\ej\gen\MiLenguajeParser.java src\main\java\com\compilador\ej\gen\MiLenguajeVisitor.java src\main\java\com\compilador\ej\gen\MiLenguajeBaseVisitor.java
 if %errorlevel% equ 0 (
     echo   ✓ Compilación completada exitosamente
 ) else (
