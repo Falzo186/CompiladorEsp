@@ -1,24 +1,96 @@
-# 🚀 CompiladorEsp - EspañolJava Lexer
+# 🚀 CompiladorEsp - EspañolJava Compiler
 
 **Compilador para un lenguaje de programación que combina la sintaxis de Java con palabras clave completamente en español.**
 
-![Status](https://img.shields.io/badge/Phase-Lexer%20Complete-green) ![Java](https://img.shields.io/badge/Java-11-orange) ![ANTLR4](https://img.shields.io/badge/ANTLR4-4.13.0-blue)
+![Status](https://img.shields.io/badge/Phase-Parser%20Complete-green) ![Java](https://img.shields.io/badge/Java-11-orange) ![ANTLR4](https://img.shields.io/badge/ANTLR4-4.13.2-blue)
 
 ---
 
 ## 📋 Descripción
 
-**EspañolJava** es un lenguaje educativo que demuestra los conceptos de compiladores usando palabras clave en español. El proyecto actual implementa la **Fase 1: Analizador Léxico (Lexer)**.
+**EspañolJava** es un lenguaje educativo que demuestra los conceptos de compiladores usando palabras clave en español. El proyecto implementa:
+
+- ✅ **Fase 1:** Analizador Léxico (Lexer) - Completo
+- ✅ **Fase 2:** Analizador Sintáctico (Parser) - Completo
+- ✅ **Fases A-C:** Construcciones sintácticas (if/else, métodos, clases)
+- ✅ **Modo Consola Interactivo** - NUEVO
 
 ### Características Principales
 
-✅ **40+ palabras clave en español**  
-✅ **25+ operadores** (aritméticos, lógicos, comparación)  
-✅ **Funciones matemáticas** como palabras reservadas  
-✅ **Manejo de números enteros y flotantes** con notación científica  
-✅ **Cadenas con escape sequences**  
-✅ **Comentarios** de línea y bloque  
-✅ **Detección de errores léxicos** con línea y columna  
+✅ **50+ palabras clave en español**  
+✅ **Operadores** aritméticos, lógicos, de comparación y asignación  
+✅ **Análisis léxico y sintáctico completo**  
+✅ **Condicionales** (if/else) con resolución de dangling else  
+✅ **Métodos** con parámetros y retorno  
+✅ **Clases** con atributos y miembros  
+✅ **Parse tree** generado automáticamente  
+✅ **Errores en español** con ubicación exacta  
+✅ **Menú interactivo** para pruebas rápidas  
+✅ **Sin análisis semántico** (scope/tipos) - Por diseño  
+
+---
+
+## 🚀 Inicio Rápido
+
+### ⚡ Opción MÁS RÁPIDA: Script PowerShell (Windows)
+
+```powershell
+cd c:\programas\CompiladorEsp
+.\compilador.ps1
+```
+
+**Opciones adicionales:**
+```powershell
+.\compilador.ps1 -Clean       # Limpiar y compilar
+.\compilador.ps1 -NoCompile   # Ejecutar sin compilar (ya compilado)
+.\compilador.ps1 -Test        # Solo prueba de lexer
+```
+
+### Opción 1: Modo Consola Interactivo (RECOMENDADO)
+
+**Windows CMD:**
+```batch
+cd c:\programas\CompiladorEsp
+bin\compilar.bat
+java -cp "build\classes;C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar" com.compilador.ej.Main
+```
+
+**PowerShell:**
+```powershell
+cd c:\programas\CompiladorEsp
+cmd /c bin\compilar.bat
+java -cp "build\classes;C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar" com.compilador.ej.Main
+```
+
+**Linux/Mac:**
+```bash
+cd /c/programas/CompiladorEsp
+./bin/compilar.sh
+java -cp "build/classes:$ANTLR4_JAR" com.compilador.ej.Main
+```
+
+Una vez en el menú, selecciona:
+- **1** → Análisis léxico de un archivo
+- **2** → Análisis sintáctico de un archivo
+- **3** → Ver parse tree (árbol sintáctico)
+- **4** → Ejecutar casos predefinidos ⭐ (más fácil, recomendado)
+- **5** → Salir
+
+**Ver:** [Modo Interactivo Completo](docs/MODO_INTERACTIVO.md)
+
+### Opción 2: Lexer Manual (Sin Menú)
+
+```bash
+java -cp "build\classes;C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar" \
+  com.compilador.ej.lexer.LexerMain resources/examples/caso1_basico.ej
+```
+
+### Opción 3: Parser Manual (Sin Menú)
+
+```bash
+java -cp "build\classes;C:\Users\alexp\Downloads\antlr-4.13.2-complete.jar" \
+  com.compilador.ej.parser.ParserTest resources/examples/caso_completo_sin_errores.ej
+```
 
 ---
 
@@ -28,26 +100,35 @@
 CompiladorEsp/
 ├── grammar/
 │   └── MiLenguaje.g4              Gramática ANTLR4
-├── src/
-│   ├── main/java/com/compilador/ej/
-│   │   └── lexer/
-│   │       ├── LexerEJ.java        Clase principal del lexer
-│   │       └── LexerMain.java      Entrada del programa
-│   └── test/                        Pruebas unitarias
+├── src/main/java/com/compilador/ej/
+│   ├── Main.java                   ← Consola interactiva (NUEVO)
+│   ├── lexer/
+│   │   ├── LexerEJ.java            Clase de análisis léxico
+│   │   └── LexerMain.java          CLI para lexer
+│   ├── parser/
+│   │   └── ParserTest.java         CLI para parser
+│   └── gen/
+│       ├── MiLenguajeLexer.java    (generado por ANTLR)
+│       ├── MiLenguajeParser.java   (generado por ANTLR)
+│       └── ...
 ├── resources/
 │   └── examples/                    Archivos de ejemplo
 │       ├── caso1_basico.ej
-│       ├── caso2_matematicas.ej
-│       ├── caso3_estres.ej
-│       ├── caso4_errores.ej
-│       └── caso5_completo.ej
+│       ├── caso_if_else.ej
+│       ├── caso_metodo_parametros.ej
+│       ├── caso_clase_metodo.ej
+│       ├── caso_completo_sin_errores.ej
+│       ├── caso_completo_con_errores.ej
+│       └── ... (más casos)
 ├── docs/                            Documentación
-│   ├── README.md
-│   ├── LEXER_README.md
-│   └── ... (más documentación)
-├── build/                           Archivos compilados
-├── bin/                             Scripts ejecutables
-├── build.xml                        Configuración Ant
+│   ├── MODO_INTERACTIVO.md         Guía del menú interactivo (NUEVO)
+│   ├── COMO_HACER_PRUEBAS.md       Pruebas manuales
+│   ├── ESPECIFICACION_TECNICA.md   Detalles técnicos
+│   └── ...
+├── bin/
+│   ├── compilar.bat                Script compilación (ACTUALIZADO)
+│   └── compilar.sh
+└── build/                           Compilados
 ├── Makefile                         Configuración Make
 └── build.properties                 Propiedades del proyecto
 ```

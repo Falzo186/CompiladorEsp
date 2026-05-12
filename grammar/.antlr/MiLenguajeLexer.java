@@ -1,4 +1,4 @@
-// Generated from c:/programas/CompiladorEsp/grammar/MiLenguaje.g4 by ANTLR 4.13.1
+// Generated from c:/programas/CompiladorEsp/grammar/MiLenguajeLexer.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -135,7 +135,7 @@ public class MiLenguajeLexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "MiLenguaje.g4"; }
+	public String getGrammarFileName() { return "MiLenguajeLexer.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
